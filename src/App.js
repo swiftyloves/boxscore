@@ -5,10 +5,28 @@ import './App.css';
 const datajson = require('./data.json');
 const Dispatcher = require('flux').Dispatcher;
 
-console.log(datajson)
+class Player extends Component {
+    constructor(props) {
+        super(props);
+    }
 
+    componentDidMount () {
 
+    }
 
+    render() {
+        let players = [];
+        for (let i = 0; i < players.length; i++) {
+            // players.push()
+        }
+        return (
+            <div class="player">
+                <div>{this.props.player.player_id}({this.props.player.id})</div>
+            </div>
+        );
+    }
+
+}
 
 class Game extends Component {
   constructor(props) {
@@ -21,19 +39,29 @@ class Game extends Component {
 
   render() {
     let players = [];
-    for (let i = 0; i < players.length; i++) {
+    for (let i = 0; i < this.props.data.players.length; i++) {
         let playerObj = this.props.data.players[i];
+        console.log(playerObj)
         if (playerObj.player_id) {
-            // players.push(<Player player={this.props.data.players[i]}>)
+            console.log(playerObj)
+            players.push(<Player player={this.props.data.players[i]} />)
         }
     }
     return (
         <div class="game">
             <div>{this.props.data.name}</div>
-            <img src={this.props.data.home.image} alt="homeimage" />
-            <div>{this.props.data.home.name}</div>
-            <img src={this.props.data.away.image} alt="homeimage" />
-            <div>{this.props.data.away.name}</div>
+            <div>
+                <div class="university">
+                    <img src={this.props.data.home.image} alt="homeimage" />
+                    <div>{this.props.data.home.name}</div>
+                </div>
+                <div class="university">
+                    <img src={this.props.data.away.image} alt="homeimage" />
+                    <div>{this.props.data.away.name}</div>
+                </div>
+
+                <div>{players}</div>
+            </div>
         </div>
     );
 
@@ -61,21 +89,11 @@ class App extends Component {
     for (let i=0; i < this.state.data.length; i++) {
         games.push(<Game data={this.state.data[i]}/>);
     }
-    console.log(games.length)
-
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React 123</h2>
-          
+        <div class="games_wrapper">
+            <div id="games">{games}</div>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div id="games">{games}</div>
-      </div>
     );
   }
 }
