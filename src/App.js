@@ -36,16 +36,26 @@ class Player extends Component {
 class Game extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            'games': this.props.scoreboard.games,
+            'scoreboard': scoreboard,
+            'michigan_airforce': michigan_airforce
+        };
     }
 
     componentDidMount () {
+        this.setState({
+            'games': this.props.scoreboard.games,
+            'scoreboard': scoreboard,
+            'michigan_airforce': michigan_airforce
+        });
 
     }
 
     render() {
-        let games = this.props.scoreboard.games;
+        let games = this.state.games;
         let teams = this.props.scoreboard.teams;
-        let keys = Object.keys(games);
+        let keys = Object.keys(this.state.games);
         let games_result = [];
         for (let i = 0; i < keys.length; i++) {
             let gameObj = games[keys[i]];
@@ -63,11 +73,9 @@ class Game extends Component {
 
             for (let i = 0; i < game_periods.length; i++) {
                 game_periods_dom.push (
-                    <div>
-                        <div> {away_team.full_name} </div>
-                        <div> {game_periods.away_points} </div>
-                        <div> {home_team.full_name} </div>
-                        <div> {game_periods.home_points} </div>
+                    <div className="period_score">
+                        <div> {game_periods[i].away_points} </div>
+                        <div> {game_periods[i].home_points} </div>
                     </div>
                 )
             }
@@ -75,8 +83,13 @@ class Game extends Component {
             games_result.push(
                 <div>
                     <div>{start_time}</div>
-                    <div></div>
-                    {game_periods_dom}
+                    <div className="game_period_wrapper">
+                        <div className="team_name">
+                            <div> {away_team.full_name} </div>
+                            <div> {home_team.full_name} </div>
+                        </div>
+                        {game_periods_dom}
+                    </div>
                 </div>
             )
         }

@@ -52,3 +52,19 @@ body {
 
 }
 
+.game_period_wrapper {
+	display: flex;
+	padding: 10px;
+}
+
+.period_score{
+	flex: 1
+}
+
+.team_name {
+	background: beige;
+	/*padding: 10px;*/
+	/*flex: 1;*/
+	width: 400px;
+	margin-right: 20px;
+}
