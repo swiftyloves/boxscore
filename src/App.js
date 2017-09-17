@@ -197,9 +197,7 @@ class Game extends Component {
 class Team extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-        players: 
-    }
+    
   }
 
   componentDidMount () {
