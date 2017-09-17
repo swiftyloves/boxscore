@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 const datajson = require('./data.json');
+const scoreboard = require('./scoreboard.json');
+// const michigan_airforce = require('./michigan_airforce.json');
+
 const Dispatcher = require('flux').Dispatcher;
 
 class Player extends Component {
@@ -30,7 +33,7 @@ class Player extends Component {
 
 }
 
-class Game extends Component {
+class Team extends Component {
   constructor(props) {
     super(props)
   }
@@ -89,7 +92,7 @@ class App extends Component {
     let firstdata = this.state.data[0].name
     let games = [];
     for (let i=0; i < this.state.data.length; i++) {
-        games.push(<Game data={this.state.data[i]}/>);
+        games.push(<Team data={this.state.data[i]}/>);
     }
 
     return (
