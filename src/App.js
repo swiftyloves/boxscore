@@ -256,8 +256,6 @@ class Team extends Component {
   }
 
   sortPlayerName(a, b) {
-    console.log(a.props.player.player_id)
-    console.log(b)
 
     if (a.props.player.player_id > b.props.player.player_id) {
         return 1;
@@ -272,13 +270,13 @@ class Team extends Component {
 
     let players = this.state.players;
     this.setState(prevState => {
+        
         players.sort(this.sortPlayerName);
+        return ({
+            players: players,
+            isSorted: true
+        })
     });
-
-    return ({
-        players: players,
-        isSorted: true
-    })
 
   }
 
