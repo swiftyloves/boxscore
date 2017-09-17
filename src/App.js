@@ -64,6 +64,9 @@ class Game extends Component {
 
         this.handleClick = this.handleClick.bind(this)
         this.sortDate = this.sortDate.bind(this)
+        this.sortName = this.sortName.bind(this)
+        this.sortByHomeTeamName = this.sortByHomeTeamName.bind(this)
+
     }
 
     componentDidMount () {
@@ -83,12 +86,32 @@ class Game extends Component {
         return a_date - b_date;
     }
 
+    sortName(a, b) {
+        let a_h_id = a.home_team_id
+        let b_h_id = b.home_team_id
+        let a_name = this.state.teams[a_h_id]
+        let b_name = this.state.teams[b_h_id]
+
+        return a_name > b_name
+    }
+
+    sortByHomeTeamName() {
+        let gameObjs = this.state.gameObjs;
+        this.setState(prevState => {
+            let gameObjs = this.state.gameObjs;
+            gameObjs.sort(this.sortName);
+
+        });
+
+        return ({
+            gameObjs: gameObjs
+        })
+    }
 
 
     handleClick() {
         this.setState(prevState => {
             let gameObjs = this.state.gameObjs;
-            console.log('gameObjs 2:',gameObjs);
             let randomNumberArr = []
             if (this.state.isSorted) {
                 // random things
@@ -188,6 +211,9 @@ class Game extends Component {
                 <button onClick={this.handleClick}>
                     {this.state.isSorted ? 'Random Sequence' : 'Sort by Date'}
                 </button>
+                <button onClick={this.sortByHomeTeamName}>
+                    Sort be Home Team Name
+                </button>
                 <div>{games_result}</div>
             </div>
         );
@@ -197,7 +223,7 @@ class Game extends Component {
 class Team extends Component {
   constructor(props) {
     super(props)
-    
+
   }
 
   componentDidMount () {
