@@ -178,8 +178,9 @@ class Game extends Component {
 
             games_result.push(
                 <div>
-                    <div>{start_time}</div>
+                    
                     <div className="game_period_wrapper">
+                        <div className="time">{start_time}</div>
                         <div className="team_name">
                             <div> {away_team.full_name} {away_win }</div>
 

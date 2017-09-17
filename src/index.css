@@ -67,6 +67,7 @@ body {
 	/*flex: 1;*/
 	width: 400px;
 	margin-right: 20px;
+	padding: 0 10px;
 }
 
 .winner {
@@ -98,4 +99,11 @@ button {
     border: 1px solid transparent;
     border-radius: 4px;
     margin: 10px;
+}
+
+.time {
+	margin-top: 10px;
+	color: gray;
+	padding: 10px;
+	flex: 1;
 }
