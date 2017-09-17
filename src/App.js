@@ -33,6 +33,59 @@ class Player extends Component {
 
 }
 
+class Game extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount () {
+
+    }
+
+    render() {
+        let games = this.props.scoreboard.games;
+        let teams = this.props.scoreboard.teams;
+        let keys = Object.keys(games);
+        let games_result = [];
+        for (let i = 0; i < keys.length; i++) {
+            let gameObj = games[keys[i]];
+            let winning_team_id = gameObj.winning_team_id;
+            let home_team_id = gameObj.home_team_id;
+            let away_team_id = gameObj.away_team_id;
+            let home_team = teams[home_team_id]
+            let away_team = teams[away_team_id]
+
+            let win_full_name = teams[winning_team_id].full_name
+            let start_time = gameObj.start_time
+            let game_periods = gameObj.game_periods
+
+            let game_periods_dom = [];
+
+            for (let i = 0; i < game_periods.length; i++) {
+                game_periods_dom.push (
+                    <div>
+                        <div> {away_team.full_name} </div>
+                        <div> {game_periods.away_points} </div>
+                        <div> {home_team.full_name} </div>
+                        <div> {game_periods.home_points} </div>
+                    </div>
+                )
+            }
+
+            games_result.push(
+                <div>
+                    <div>{start_time}</div>
+                    <div></div>
+                    {game_periods_dom}
+                </div>
+            )
+        }
+        return (
+            <div>{games_result}</div>
+        );
+    }
+}
+
 class Team extends Component {
   constructor(props) {
     super(props)
@@ -98,11 +151,15 @@ class App extends Component {
         teams.push(<Team data={this.state.data[i]}/>);
     }
 
-    // const games = <Game scoreboard={this.state.scoreboard}/>
+    const games = <Game scoreboard={this.state.scoreboard}/>
     return (
-        <div className="teams_wrapper">
-            <div id="teams">{teams}</div>
+        <div>
+            {games}
+            <div className="teams_wrapper">
+                <div id="teams">{teams}</div>
+            </div>
         </div>
+
     );
   }
 }
