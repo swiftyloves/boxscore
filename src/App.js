@@ -38,9 +38,12 @@ class Game extends Component {
         super(props)
         this.state = {
             'games': this.props.scoreboard.games,
+            'teams': this.props.scoreboard.teams,
             'scoreboard': scoreboard,
             'michigan_airforce': michigan_airforce
         };
+
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount () {
@@ -52,9 +55,17 @@ class Game extends Component {
 
     }
 
+    handleClick() {
+        this.setState(prevState => {
+            return ({
+                isToggleOn: !prevState.isToggleOn
+            })
+        });
+    }
+
     render() {
         let games = this.state.games;
-        let teams = this.props.scoreboard.teams;
+        let teams = this.state.teams;
         let keys = Object.keys(this.state.games);
         let games_result = [];
         for (let i = 0; i < keys.length; i++) {
@@ -94,7 +105,12 @@ class Game extends Component {
             )
         }
         return (
+            <div>
+            <button onClick={this.handleClick}>
+                {this.state.isSorted ? 'Random' : 'Sort'}
+            </button>
             <div>{games_result}</div>
+            </div>
         );
     }
 }
@@ -112,9 +128,7 @@ class Team extends Component {
     let players = [];
     for (let i = 0; i < this.props.data.players.length; i++) {
         let playerObj = this.props.data.players[i];
-        console.log(playerObj)
         if (playerObj.player_id) {
-            console.log(playerObj)
             players.push(<Player player={this.props.data.players[i]} />)
         }
     }
