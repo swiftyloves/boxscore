@@ -23,11 +23,3 @@
   to { transform: rotate(360deg); }
 }
 
-
-.player {
-  display: inline-block;
-}
-
-.games_wrapper {
-  padding: 100px;
-}

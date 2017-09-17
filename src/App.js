@@ -49,18 +49,18 @@ class Game extends Component {
     }
     return (
         <div class="game">
-            <div>{this.props.data.name}</div>
-            <div>
-                <div class="university">
+            <div className="title">{this.props.data.name}</div>
+            <div className="table">
+                <div className="university">
                     <img src={this.props.data.home.image} alt="homeimage" />
                     <div>{this.props.data.home.name}</div>
                 </div>
-                <div class="university">
+                <div className="university">
                     <img src={this.props.data.away.image} alt="homeimage" />
                     <div>{this.props.data.away.name}</div>
                 </div>
 
-                <div>{players}</div>
+                <div className="players">{players}</div>
             </div>
         </div>
     );
@@ -91,7 +91,7 @@ class App extends Component {
     }
 
     return (
-        <div class="games_wrapper">
+        <div className="games_wrapper">
             <div id="games">{games}</div>
         </div>
     );
