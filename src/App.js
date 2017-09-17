@@ -36,11 +36,22 @@ class Player extends Component {
 class Game extends Component {
     constructor(props) {
         super(props)
+        
+        let gameObjs = []
+
+        let keys = Object.keys(this.props.scoreboard.games);
+        for (let i = 0; i < keys.length; i++) {
+            gameObjs.push(this.props.scoreboard.games[keys[i]]);
+        }
+        console.log('gameObjs:',gameObjs)
+
         this.state = {
             'games': this.props.scoreboard.games,
+            'gameObjs': gameObjs,
             'teams': this.props.scoreboard.teams,
             'scoreboard': scoreboard,
-            'michigan_airforce': michigan_airforce
+            'michigan_airforce': michigan_airforce,
+            'isSorted': true
         };
 
         this.handleClick = this.handleClick.bind(this)
@@ -57,10 +68,42 @@ class Game extends Component {
 
     handleClick() {
         this.setState(prevState => {
+            let gameObjs = this.state.gameObjs;
+            console.log('gameObjs 2:',gameObjs);
+            let randomNumberArr = []
+            if (this.state.isSorted) {
+                // random things
+                let randomNumberArr = this.randomNumberArr();
+                console.log('let randomNumberArr:',randomNumberArr)
+            }
+            
             return ({
-                isToggleOn: !prevState.isToggleOn
+                isSorted: !this.state.isSorted,
+                gameObjs: randomNumberArr
             })
         });
+    }
+
+    randomNumberArr() {
+
+        let array = this.state.gameObjs
+        let currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+        }
+
+        
+        return array;
     }
 
     render() {
@@ -68,8 +111,11 @@ class Game extends Component {
         let teams = this.state.teams;
         let keys = Object.keys(this.state.games);
         let games_result = [];
+
+
         for (let i = 0; i < keys.length; i++) {
             let gameObj = games[keys[i]];
+
             let winning_team_id = gameObj.winning_team_id;
             let home_team_id = gameObj.home_team_id;
             let away_team_id = gameObj.away_team_id;
