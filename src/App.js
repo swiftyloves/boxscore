@@ -8,30 +8,6 @@ const michigan_airforce = require('./michgan_airforce.json');
 
 const Dispatcher = require('flux').Dispatcher;
 
-class Player extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount () {
-
-    }
-
-    render() {
-        let players = [];
-        for (let i = 0; i < players.length; i++) {
-            // players.push()
-        }
-        return (
-            <div className="player">
-                <div className="player_unit">{this.props.player.player_id}</div>
-                <div className="player_unit">{this.props.player.position_id}</div>
-                <div className="player_unit">{this.props.player.number}</div>
-            </div>
-        );
-    }
-
-}
 
 let sortDate = function(a, b) {
         console.log(a)
@@ -229,17 +205,36 @@ class Game extends Component {
     }
 }
 
+
+class Player extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount () {
+
+    }
+
+    render() {
+        let players = [];
+        for (let i = 0; i < players.length; i++) {
+            // players.push()
+        }
+        return (
+            <div className="player">
+                <div className="player_unit">{this.props.player.player_id}</div>
+                <div className="player_unit">{this.props.player.position_id}</div>
+                <div className="player_unit">{this.props.player.number}</div>
+            </div>
+        );
+    }
+
+}
+
 class Team extends Component {
   constructor(props) {
     super(props)
 
-  }
-
-  componentDidMount () {
-    
-  }
-
-  render() {
     let players = [];
     for (let i = 0; i < this.props.data.players.length; i++) {
         let playerObj = this.props.data.players[i];
@@ -247,6 +242,18 @@ class Team extends Component {
             players.push(<Player player={this.props.data.players[i]} />)
         }
     }
+
+    this.state = {
+        players: players
+    };
+  }
+
+  componentDidMount () {
+    
+  }
+
+  render() {
+
     return (
         <div class="game">
             <div className="title">{this.props.data.name}</div>
@@ -260,7 +267,7 @@ class Team extends Component {
                     <div>{this.props.data.away.name}</div>
                 </div>
 
-                <div className="players_wrapper"><div className="players">{players}</div></div>
+                <div className="players_wrapper"><div className="players">{this.state.players}</div></div>
             </div>
         </div>
     );
