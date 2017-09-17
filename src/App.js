@@ -20,8 +20,10 @@ class Player extends Component {
             // players.push()
         }
         return (
-            <div class="player">
-                <div>{this.props.player.player_id}({this.props.player.id})</div>
+            <div className="player">
+                <div className="player_unit">{this.props.player.player_id}</div>
+                <div className="player_unit">{this.props.player.position_id}</div>
+                <div className="player_unit">{this.props.player.number}</div>
             </div>
         );
     }
@@ -60,7 +62,7 @@ class Game extends Component {
                     <div>{this.props.data.away.name}</div>
                 </div>
 
-                <div className="players">{players}</div>
+                <div className="players_wrapper"><div className="players">{players}</div></div>
             </div>
         </div>
     );

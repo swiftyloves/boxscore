@@ -5,19 +5,36 @@ body {
 }
 
 
+.players {
+	/*display: flex;*/
+	width: 100%;
+	flex-wrap: wrap;
+
+}
+
+.players_wrapper {
+	flex: 5;
+}
 
 .player {
-  display: inline-block;
+  /*display: inline-block;*/
+  /*flex: 1;*/
+  display: flex;
+}
+
+.player_unit {
+	flex: 1;
 }
 
 .games_wrapper {
-  padding: 100px;
+  padding: 40px 100px;
 }
 
 .title {
 	font-size: 45px;
 	font-weight: 100;
-	margin-top: 20px;
+	margin-top: 40px;
+	margin-bottom: 20px;
 }
 
 .table {
@@ -29,6 +46,3 @@ body {
 	flex: 1;
 }
 
-.players {
-	flex: 5;
-}
