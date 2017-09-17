@@ -87,15 +87,27 @@ class Game extends Component {
     }
 
     sortName(a, b) {
+        console.log('sortName')
         let a_h_id = a.home_team_id
+        console.log('a.home_team_id:',a.home_team_id)
+        console.log('b.home_team_id:',b.home_team_id)
         let b_h_id = b.home_team_id
-        let a_name = this.state.teams[a_h_id]
-        let b_name = this.state.teams[b_h_id]
+        let a_name = this.state.teams[a_h_id].full_name;
+        let b_name = this.state.teams[b_h_id].full_name;
+        console.log('a_name:',a_name)
+        console.log('b_name:',b_name)
+        
 
-        return a_name > b_name
+
+        if (a_name > b_name) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     sortByHomeTeamName() {
+        console.log('sortByHomeTeamName')
         let gameObjs = this.state.gameObjs;
         this.setState(prevState => {
             let gameObjs = this.state.gameObjs;
@@ -166,10 +178,7 @@ class Game extends Component {
             let away_team_id = gameObj.away_team_id;
             let home_team = teams[home_team_id]
             let away_team = teams[away_team_id]
-            console.log('winning_team_id:',winning_team_id);
-            console.log('home_team_id:',home_team_id);
-            console.log('away_team_id:',away_team_id);
-
+            
             let win_full_name = teams[winning_team_id].full_name
             let start_time = gameObj.start_time
             let game_periods = gameObj.game_periods
