@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 const datajson = require('./data.json');
-const scoreboard = require('./scoreboard.json');
-// const michigan_airforce = require('./michigan_airforce.json');
+const scoreboard = require('./scoreboard.json').service.scoreboard;
+const michigan_airforce = require('./michgan_airforce.json');
 
 const Dispatcher = require('flux').Dispatcher;
 
@@ -76,7 +76,11 @@ class Team extends Component {
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {'data': datajson};
+    this.state = {
+        'data': datajson,
+        'scoreboard': scoreboard,
+        'michigan_airforce': michigan_airforce
+    };
   }
 
   componentDidMount () {
@@ -89,15 +93,15 @@ class App extends Component {
   }
 
   render() {
-    let firstdata = this.state.data[0].name
-    let games = [];
+    let teams = [];
     for (let i=0; i < this.state.data.length; i++) {
-        games.push(<Team data={this.state.data[i]}/>);
+        teams.push(<Team data={this.state.data[i]}/>);
     }
 
+    // const games = <Game scoreboard={this.state.scoreboard}/>
     return (
-        <div className="games_wrapper">
-            <div id="games">{games}</div>
+        <div className="teams_wrapper">
+            <div id="teams">{teams}</div>
         </div>
     );
   }
