@@ -33,6 +33,15 @@ class Player extends Component {
 
 }
 
+let sortDate = function(a, b) {
+        console.log(a)
+        console.log(b)
+        let a_date = new Date(a.start_time);
+        let b_date = new Date(b.start_time);
+        return a_date - b_date;
+
+    }
+
 class Game extends Component {
     constructor(props) {
         super(props)
@@ -55,6 +64,7 @@ class Game extends Component {
         };
 
         this.handleClick = this.handleClick.bind(this)
+        this.sortDate = this.sortDate.bind(this)
     }
 
     componentDidMount () {
@@ -66,6 +76,15 @@ class Game extends Component {
 
     }
 
+    sortDate = function(a, b) {
+        console.log(a)
+        console.log(b)
+        let a_date = new Date(a.start_time);
+        let b_date = new Date(b.start_time);
+        return a_date - b_date;
+
+    }
+
     handleClick() {
         this.setState(prevState => {
             let gameObjs = this.state.gameObjs;
@@ -73,13 +92,17 @@ class Game extends Component {
             let randomNumberArr = []
             if (this.state.isSorted) {
                 // random things
-                let randomNumberArr = this.randomNumberArr();
-                console.log('let randomNumberArr:',randomNumberArr)
+                gameObjs = this.randomNumberArr();
+                console.log('let randomNumberArr:',gameObjs)
+            } else {
+                console.log('gameObjs:',gameObjs);
+                gameObjs.sort(this.sortDate);
+                // gameObjs.sort(sortDate);
             }
             
             return ({
                 isSorted: !this.state.isSorted,
-                gameObjs: randomNumberArr
+                gameObjs: gameObjs
             })
         });
     }
@@ -111,10 +134,9 @@ class Game extends Component {
         let teams = this.state.teams;
         let keys = Object.keys(this.state.games);
         let games_result = [];
-
-
-        for (let i = 0; i < keys.length; i++) {
-            let gameObj = games[keys[i]];
+        console.log('this.state.gameObjs:',this.state.gameObjs);
+        for (let i = 0; i < this.state.gameObjs.length; i++) {
+            let gameObj = this.state.gameObjs[i];
 
             let winning_team_id = gameObj.winning_team_id;
             let home_team_id = gameObj.home_team_id;
@@ -152,10 +174,10 @@ class Game extends Component {
         }
         return (
             <div>
-            <button onClick={this.handleClick}>
-                {this.state.isSorted ? 'Random' : 'Sort'}
-            </button>
-            <div>{games_result}</div>
+                <button onClick={this.handleClick}>
+                    {this.state.isSorted ? 'Random' : 'Sort'}
+                </button>
+                <div>{games_result}</div>
             </div>
         );
     }
