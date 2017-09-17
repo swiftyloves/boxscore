@@ -39,7 +39,6 @@ let sortDate = function(a, b) {
         let a_date = new Date(a.start_time);
         let b_date = new Date(b.start_time);
         return a_date - b_date;
-
     }
 
 class Game extends Component {
@@ -82,8 +81,9 @@ class Game extends Component {
         let a_date = new Date(a.start_time);
         let b_date = new Date(b.start_time);
         return a_date - b_date;
-
     }
+
+
 
     handleClick() {
         this.setState(prevState => {
@@ -143,6 +143,9 @@ class Game extends Component {
             let away_team_id = gameObj.away_team_id;
             let home_team = teams[home_team_id]
             let away_team = teams[away_team_id]
+            console.log('winning_team_id:',winning_team_id);
+            console.log('home_team_id:',home_team_id);
+            console.log('away_team_id:',away_team_id);
 
             let win_full_name = teams[winning_team_id].full_name
             let start_time = gameObj.start_time
@@ -158,14 +161,22 @@ class Game extends Component {
                     </div>
                 )
             }
+            let away_win = '';
+            let home_win = '';
+            if (away_team_id === winning_team_id) {
+                away_win = <span className="winner">Winner!</span>
+            } else if (home_team_id === winning_team_id) {
+                home_win = <span className="winner">Winner!</span>
+            }
 
             games_result.push(
                 <div>
                     <div>{start_time}</div>
                     <div className="game_period_wrapper">
                         <div className="team_name">
-                            <div> {away_team.full_name} </div>
-                            <div> {home_team.full_name} </div>
+                            <div> {away_team.full_name} {away_win }</div>
+
+                            <div> {home_team.full_name} {home_win }</div>
                         </div>
                         {game_periods_dom}
                     </div>
@@ -175,7 +186,7 @@ class Game extends Component {
         return (
             <div>
                 <button onClick={this.handleClick}>
-                    {this.state.isSorted ? 'Random' : 'Sort'}
+                    {this.state.isSorted ? 'Random Sequence' : 'Sort by Date'}
                 </button>
                 <div>{games_result}</div>
             </div>
@@ -186,6 +197,9 @@ class Game extends Component {
 class Team extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+        players: 
+    }
   }
 
   componentDidMount () {

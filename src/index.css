@@ -68,3 +68,8 @@ body {
 	width: 400px;
 	margin-right: 20px;
 }
+
+.winner {
+	color: red;
+	font-weight: 400;
+}
